@@ -88,7 +88,7 @@ public class WebSocketClientConfiguration {
         };
         if (enabled) {
             webSocketClient.setProxy(new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost, proxyPort)));
-            log.debug("enabled socks5.", "address: " + proxyHost + ":" + proxyPort);
+            log.debug("enabled socks5. address: " + proxyHost + ":" + proxyPort);
         }
         WebSocketImpl.DEBUG = debug;
         return webSocketClient;
