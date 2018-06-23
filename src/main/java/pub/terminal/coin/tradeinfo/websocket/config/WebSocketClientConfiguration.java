@@ -1,5 +1,7 @@
 package pub.terminal.coin.tradeinfo.websocket.config;
 
+import com.oracle.tools.packager.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -20,6 +22,7 @@ import java.nio.ByteBuffer;
 
 @Component
 @Configuration
+@Slf4j
 public class WebSocketClientConfiguration {
 
     @Value("${websocket.host}")
@@ -86,6 +89,7 @@ public class WebSocketClientConfiguration {
         };
         if (enabled) {
             webSocketClient.setProxy(new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost, proxyPort)));
+            log.debug("enabled socks5.");
         }
         WebSocketImpl.DEBUG = debug;
         return webSocketClient;
