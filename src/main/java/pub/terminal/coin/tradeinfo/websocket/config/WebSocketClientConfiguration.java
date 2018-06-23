@@ -1,15 +1,13 @@
 package pub.terminal.coin.tradeinfo.websocket.config;
 
+import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import pub.terminal.coin.tradeinfo.TradeInfoApplication;
 import pub.terminal.coin.tradeinfo.websocket.WebSocketClientAdapter;
 import pub.terminal.coin.tradeinfo.websocket.decoder.StringMessageDecoder;
 
@@ -20,18 +18,18 @@ import java.nio.ByteBuffer;
 
 @Component
 @Configuration
-public class WebSocketClientConfiguration implements ApplicationContextAware {
+public class WebSocketClientConfiguration {
 
-    private ApplicationContext applicationContext = null;
+    @Value("${websocket.host}")
+    private String url;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+    @Value("${websocket.debug}")
+    private boolean debug;
+
 
     @Bean
     public WebSocketClient getWebSocketClient(WebSocketClientAdapter adapter, @Qualifier("GZIP") StringMessageDecoder messageDecoder) throws URISyntaxException {
-        WebSocketClient webSocketClient = new WebSocketClient(new URI(TradeInfoApplication.webSocketHost)) {
+        WebSocketClient webSocketClient = new WebSocketClient(new URI(url)) {
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 adapter.onOpen(this, serverHandshake);
@@ -75,6 +73,7 @@ public class WebSocketClientConfiguration implements ApplicationContextAware {
             }
 
         };
+        WebSocketImpl.DEBUG = debug;
         return webSocketClient;
     }
 
