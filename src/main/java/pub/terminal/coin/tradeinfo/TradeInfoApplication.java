@@ -29,7 +29,7 @@ public class TradeInfoApplication implements CommandLineRunner {
         SpringApplication.run(TradeInfoApplication.class, args);
     }
 
-    @Bean
+    @Bean(name="taskExecutor")
     public TaskExecutor getTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(100);
