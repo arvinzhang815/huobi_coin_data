@@ -12,6 +12,8 @@ import pub.terminal.coin.tradeinfo.websocket.WebSocketClientAdapter;
 import pub.terminal.coin.tradeinfo.websocket.decoder.StringMessageDecoder;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
@@ -25,6 +27,15 @@ public class WebSocketClientConfiguration {
 
     @Value("${websocket.debug}")
     private boolean debug;
+
+    @Value("${socks5.host}")
+    private String proxyHost;
+
+    @Value("${socks5.port}")
+    private int proxyPort;
+
+    @Value("${socks5.enabled}")
+    private boolean enabled;
 
 
     @Bean
@@ -73,6 +84,9 @@ public class WebSocketClientConfiguration {
             }
 
         };
+        if (enabled) {
+            webSocketClient.setProxy(new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost, proxyPort)));
+        }
         WebSocketImpl.DEBUG = debug;
         return webSocketClient;
     }

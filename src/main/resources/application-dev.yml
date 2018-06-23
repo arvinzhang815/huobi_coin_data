@@ -3,3 +3,6 @@ spring:
       url: jdbc:mysql://localhost:3306/coin?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: admin
+
+socks5:
+  enabled: false
