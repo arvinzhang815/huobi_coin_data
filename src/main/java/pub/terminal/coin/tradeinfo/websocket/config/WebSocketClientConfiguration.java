@@ -1,6 +1,5 @@
 package pub.terminal.coin.tradeinfo.websocket.config;
 
-import com.oracle.tools.packager.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
