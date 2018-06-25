@@ -5,7 +5,7 @@ logging:
 
 spring:
     datasource:
-      url: jdbc:mysql://localhost:3309/coin?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+      url: jdbc:mysql://192.168.30.135:3309/coin?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: admin
     jpa:
@@ -15,6 +15,14 @@ spring:
       show-sql: true
 
 socks5:
-    host: localhost
+    host: 127.0.0.1
     port: 1080
     enabled: true
+
+
+websocket:
+  debug: true
+  host: wss://api.huobipro.com/ws
+
+server:
+  port: 5060
