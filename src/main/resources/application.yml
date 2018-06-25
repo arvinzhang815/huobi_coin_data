@@ -21,8 +21,8 @@ socks5:
 
 
 websocket:
-  debug: true
-  host: wss://api.huobipro.com/ws
+    debug: true
+    host: wss://api.huobipro.com/ws
 
 server:
   port: 5060
